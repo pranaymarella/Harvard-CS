@@ -1,0 +1,31 @@
+1.  <stdint.h> is a header file that defines new integer types.
+    The default integer types may vary becaue they are based on how the system was designed/implemented.
+    Stdint is a header file that contains new integer types that can act as a standard across any kind of system.
+
+2.  uint8_t, uint16_t, unit32_t are unsigned, so only positive values, and can only be 8, 16, or 32 (respectively) bits long.
+    int32_t is signed, so it may contain negative and positive values, and it is of size 32 bits.
+
+3.  A BYTE is a 1 byte (8 bits) unsigned value.
+    A DWORD is a 4 byte (32-bits) unsinged integer.
+    A LONG is a 4 byte (32-bits) signed integer.
+    A WORD is a 2 byte (16-bit) unsigned integer.
+
+4.  424d in hexadecimal must be the first two bytes of any BMP file.
+
+5.  bfSize is the size, in bytes, of the bitmap file.
+    biSize is specifying how many bytes are required for the structure BITMAPINFOHEADER
+
+6.  biHeight is negative when it is indicating a top-down Device Independent Bitmap (DIB). These cannot be compressed.
+
+7.  biBitCount is responsible for specifying the BMP's color depth.
+
+8.  fopen might return NULL in lines 24 and 32 of copy.c if the user does not provide an input file AND an output file.
+    Both are needed for copy.c to work.
+
+9.  The thrid argument of fread is always 1 in our code because 1 is the number of elements we are reading at a time.
+
+10. Padding is 3 when bi.biWidth is 3.
+
+11. fseek changes the position of where the pointer is pointing so that we can skip over the padding, if there is any padding.
+
+12. SEEK_CUR tells fseek that the offset is in the current position of the indicator.

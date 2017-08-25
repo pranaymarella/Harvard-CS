@@ -1,0 +1,28 @@
+0.  pneumonoultramicroscopicsilicovolcanoconiosis is the longest word in the dictionaries/large.
+
+1.  gets resource usage statistics for the structure which is calling it.
+
+2.  There are 16 members in a variable of type struct rusage.
+
+3.  Before and After are structs, and they need to be passed in by reference into the function getrusage.
+
+4.  Main first creates a pointer of type FILE called fp which points to the the location returned by fopen(text, "r");
+    If this location is NULL, that means that there is no file to be read and main returns error.
+    If a location was found, then main has a for loop which goes through character by character until it reaches the end of the file.
+    
+    Within the for loop, the first check is to see if the current character is an alphabet (called by isalpha()) or an apostrophe that is not at the beginning of the word.
+    If these checks return true, then we start building an array of our word with current character being added and then incrementing the index.
+    The longest word can only be 45 characters long, if our index is larger than this, we must go to the end of the characters we are reading because it is not a word. Reset Index for new word.
+    
+    If the first check did not pass, the second check is to see if current character is a digit.
+    If the current character is a digit, we ignore the rest of this word. Reset index back to 0.
+    
+    If second check did not pass, we must have found a whole word. Now, we end the last word we were reading.
+    Update our counter for number of words encountered.
+    Check the spelling of the word, using check(word). If this returns True, then we do not have a misspelling.
+    If we did have a misspelling, then we print the word and increment the misspellings counter.
+
+5.  Relying on fscaf could cause memory leaks because we set the max limit of a word to be 45 characters.
+    If there was an error in our dictionary and there was a string of characters longer thatn 45 characters, we would be messing with memory not allocated for us.
+
+6.  The parameters for check and load are const because we do not want to change the values of the parameters accidentally. We only use them to check.

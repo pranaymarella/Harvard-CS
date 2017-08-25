@@ -1,0 +1,5 @@
+0. Besides 4 x 4, the framework allows dimensions 3 x 3 up to 9 x 9.
+1. The games board is represented as an array of array. Where each index of an array holds another array. Making row x column.
+2. The function greet() is called to greet the player at the game's start. 
+    It does not return anything and does not take in any parameters. void greet(void); is its prototype.
+3. I need to implement the functions: init(), draw(), move(), and won().

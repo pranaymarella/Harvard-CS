@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>Transacted (Most Recent to Least Recent)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stock in history %}
+        <tr>
+            <td>{{stock.symbol}}</td>
+            <td>{{stock.shares}}</td>
+            <td>${{ "%0.2f" % stock.price }}</td>
+            <td>{{stock.datetime}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

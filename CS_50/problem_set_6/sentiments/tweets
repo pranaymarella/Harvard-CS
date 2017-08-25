@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import helpers
+import nltk
+
+from analyzer import Analyzer
+from termcolor import colored
+
+# TODO
+def main():
+    if (len(sys.argv) != 2):
+        sys.exit("Usage: ./tweets @screen_name")
+    
+    # store the users screen_name without the leading @
+    screen_name = sys.argv[1].strip('@')
+    # fetch the user's 50 most recent tweets
+    tweets = helpers.get_user_timeline(screen_name, 50)
+    
+    # if screen_name was valid
+    if tweets:
+        # get pathway of positive and negative word files
+        positives = os.path.join(sys.path[0], "positive-words.txt")
+        negatives = os.path.join(sys.path[0], "negative-words.txt")
+        # create analyzer object
+        analyzer = Analyzer(positives, negatives)
+        # create tokenizer object
+        tokenizer = nltk.tokenize.TweetTokenizer()
+        
+        # for every tweet within the fetched tweets
+        for tweet in tweets:
+            # tokenize the tweet
+            tokens = tokenizer.tokenize(tweet)
+            # for every tweet, start score at 0
+            score = 0
+            
+            # for every word, analyze it to get it's score and add it 
+            for i in tokens:
+                score += analyzer.analyze(i)
+            
+            # print output based on score of current tweet
+            if (score > 0.0):
+                print(colored("{} {}".format(score, tweet), "green"))
+            elif (score < 0.0):
+                print(colored("{} {}".format(score, tweet), "red"))
+            else:
+                print(colored("{} {}".format(score, tweet), "yellow"))
+    # screen_name was not valid, error.
+    else:
+        sys.exit("{} could not be found".format(screen_name))
+    
+if __name__ == "__main__":
+    main()
